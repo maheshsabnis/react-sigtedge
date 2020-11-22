@@ -1,14 +1,28 @@
+// The react object model loading
 import React from 'react';
 import ReactDOM from 'react-dom';
+// css object model imports
 import './index.css';
 // imporing the bootstrap modules
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
+// import develper created Components (class components/  functional components)
+import App from './App';
+import EventComponent from './components/eventcomponent/eventcomponent';
+// web utilities used by react-scripts
+import reportWebVitals from './reportWebVitals';
+// Using React.dom
+// Get the Component Instance
+// Validate the Component using JSX
+// MOUNT the Component in Browser as 'Custom-Element'
+const message = "I am the Parent Component";
+const v1=100;
+// the message will be passed to the SimpleComponent
+// using Custom property System of 'props' with the property name as 'msg'
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+   {/* <SimpleComponent msg={message} val={v1}/> */}
+   <EventComponent></EventComponent>
   </React.StrictMode>,
   document.getElementById('root')
 );

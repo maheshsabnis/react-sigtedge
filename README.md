@@ -79,3 +79,34 @@ React Components Types
 - Currently used as a Standard of React App development
 - Uses React 'hooks' from 16.8 + for State and the Lifecycle management
 - Maintainability
+=======================================================================================================
+React
+1. Components<P,S> class
+  - used as base class for Class components
+  - P, the 'props' object, used to pass data(aka state) across components
+    - data, the property values or function references  
+      - Function References means F1() == F2()
+    - the 'props' is an immutable object
+      - We can keep define properties in it and it will be 'live' at application scope across 
+        all parentt-to-child components  
+  - S, the 'state' object, the state local to the component and mutable, i.e. the state will be
+    destroyed one the component is unloded (un-mounted)
+  - State properties Binding with HTML element using the JSX attribute System
+     e.g. <input type="text" value={this.state.<PROPERTY-NAME>}>
+      - value is JSX attribute , PROPERTY-NAME is state of the component
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
