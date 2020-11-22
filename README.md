@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Install react CLI using following command
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+npm install -g create-react-app
 
-## Available Scripts
+-- The package.json file as a configuration file for the Project
 
-In the project directory, you can run:
+Runtime dependencies
 
-### `yarn start`
+react, the react object model
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+react-dom , the react DOM rendering Object Model
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+-- Installition of any third party lib
+npm install --save <PACKAGE-NAME>
 
-### `yarn test`
+npm install --save bootstrap
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ES 6 Modules, exports the objects so that the Containing libraries can import them
 
-### `yarn build`
+-- The Build COnfiguration
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+react-script build command
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-- Contains all static HTML / CSS Transpilation into JS
+-- so that it will be easily loaded in Browser and reduce the
+-- loading time
+  41.21 KB (-4 B)  build/static/js/2.e010b95e.chunk.js
+  22.49 KB         build/static/css/2.1a02f21c.chunk.css
+  1.4 KB (+1 B)    build/static/js/3.6fb68425.chunk.js
+--- The Runtime Object Model provided by WebPack to React Application
+-- so that React App will be executed in browser
+  1.17 KB (+2 B)   build/static/js/runtime-main.d0d73908.js
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+--- The Developer JavaScript and CSS code that is used in the project
+--- Internally it uses 'webpack' module bundler tool
+--- uses the Babel transpiler to transpile (COmpile the ES 6 code into ES 3)  
+--- WebPack uses CSS loader and Style Loader to compress CSS files used by developer
 
-### `yarn eject`
+598 B (+221 B)   build/static/js/main.ccc51897.chunk.js
+  531 B (+253 B)   build/static/css/main.8c8b27cf.chunk.css
+=====================================================================================================
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+React.js Components
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+They are Basic Building Units of React Apps to generate reusable and composable Views
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. UI
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Static HTML elements
+  - Compiled using React.DOM object Model
+    - Validate HTML Tag (or element) using JSX compiler
+      - JSX, the XML Rule based Compiler for React application to valdiate the HTML
+      - JSX have define an HTML Element System with Attributes so that they are dynamically excecuted
 
-## Learn More
+2. State or Data
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Conains the Data Definition properties that will be used by HTML UI for Showing data to end-user
+    or accepting data from end-user
+- The HTML element is bind with the state proeprties using JSX Attributes to show / accept data
+  - e.g. value, className, text, selected, etc.  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3.Events
 
-### Code Splitting
+- An Eventing System that will be used to define behavior of HTML elements
+- Used to  Modify state of component
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+React Components Types
 
-### Analyzing the Bundle Size
+1. Class Components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- ES 6 class that is derived from 'Component' base class
+- Uses the 'Lifeycycle' methods to define behavior of Components
+- Used extensively till React 15.x before release of React 16
 
-### Making a Progressive Web App
+2.Functional Componets
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- ES 6 functions returning HTML for HTML rendering  
+- Introduced in React 16.0 +
+- Currently used as a Standard of React App development
+- Uses React 'hooks' from 16.8 + for State and the Lifecycle management
+- Maintainability
