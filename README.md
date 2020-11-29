@@ -94,9 +94,61 @@ React
   - State properties Binding with HTML element using the JSX attribute System
      e.g. <input type="text" value={this.state.<PROPERTY-NAME>}>
       - value is JSX attribute , PROPERTY-NAME is state of the component
+=================================================================================================
+Class Components
+- Controlled Components
+  - State + Event Driven Componets
+    - The State={} object is used to define the data for the component.
+    - This data will be used to decie the rendering
+    - Events, used to define behavior of the component
+    - Predictable mechanism of deciding the Component's data and its behavior
+    - USed this in Line-of-Business (LOB) front-end apps
+  - React Forms is the implementation  of Controlled Component
+    -Avoid the unnecessary code on front-end
+    - Validation logic
+- UnControlled Components
+  - Familier approach of typical HTML + JavaScript programming
+    -e.g. <input type="text" id="txt">
+      - document.getElementById('txt').value="";
+    - UnControlled COmponent
+      - <input type="text" ref="EMPNO">
+        - EMPNO is reference of input element
+          - this.refs.EMPNO="ABC"; // writing data
+          -  var val = this.refs.EMPNO;        
+- Lifecycle Hooks
+  - Methods used to define the execution strategy of COmponent Post rendering
+- React 16.0+ Advance Features
+  - Error Management
+  - Pattern of React Component Implementation with Higher-Order-Component  (HoC)
+  - Navigation Support for SPA
+
+=====================================================================================================
+Make sure that, possibly write a single method for UI elements to listen their changes and update 
+state. E.g. The 'onChange' event is common for input and select elements, so bind a single method 
+to detect changes and update state properties. TO implement this 'the "name" attribute' of input and
+select element must match with "state property" bind to that element.  
+
+=====================================================================================================
+The reason for setState() is to make sure that the STATE of the component is updated and the react
+Component's lifecycle will execute 'render()' again
+=====================================================================================================
+Some important rules of the React Component UI Compositions
+1. Possibly avoid Hard-coding for UI that is generated dynamically
+2. If same UI is repated across various components the create  reusable components  
+  - If creating reusable components, then make sure that you use correct props types for data
+    display and rendering
+  - makes sure that, the component communicate with its parent with apropriate methods and values   
 
 
+=====================================================================================================
 
+Create a TableComponent with following specifications
+1. It Should Generate Row and Columns based on DataSoure property passed to it from parent component
+2. The component should accept two properties as 'CanDelete', 'CanSort'
+  - If CanDelete is true, then each row should show delete button. When this button is clicked
+    the record should be deleted from parent component's array
+  - If CanSort is true, then the parent component should passs 'SortKey' property to TableComponent
+    this SortKey is the property name based on which the table component show the sorted data    
 
 
 

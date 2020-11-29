@@ -9,6 +9,7 @@ import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import develper created Components (class components/  functional components)
 import App from './App';
 import EventComponent from './components/eventcomponent/eventcomponent';
+import ProductComponent from './components/productcomponent/productcomponent'; 
 // web utilities used by react-scripts
 import reportWebVitals from './reportWebVitals';
 // Using React.dom
@@ -22,7 +23,7 @@ const v1=100;
 ReactDOM.render(
   <React.StrictMode>
    {/* <SimpleComponent msg={message} val={v1}/> */}
-   <EventComponent></EventComponent>
+   <ProductComponent></ProductComponent>
   </React.StrictMode>,
   document.getElementById('root')
 );
