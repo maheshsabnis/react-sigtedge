@@ -10,6 +10,10 @@ import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import EventComponent from './components/eventcomponent/eventcomponent';
 import ProductComponent from './components/productcomponent/productcomponent'; 
+import DataValidationComponent from './components/validationcomponent/datavalidationcomponent';
+
+import LifeCycleComponent from './components/lifecycledemos/lifecyclecomponent'
+import ServiceCompoent from './components/servicecomponent/servicecomponent';
 // web utilities used by react-scripts
 import reportWebVitals from './reportWebVitals';
 // Using React.dom
@@ -23,7 +27,7 @@ const v1=100;
 ReactDOM.render(
   <React.StrictMode>
    {/* <SimpleComponent msg={message} val={v1}/> */}
-   <ProductComponent></ProductComponent>
+   <ServiceCompoent></ServiceCompoent>
   </React.StrictMode>,
   document.getElementById('root')
 );

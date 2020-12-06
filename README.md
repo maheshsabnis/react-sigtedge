@@ -149,8 +149,30 @@ Create a TableComponent with following specifications
     the record should be deleted from parent component's array
   - If CanSort is true, then the parent component should passs 'SortKey' property to TableComponent
     this SortKey is the property name based on which the table component show the sorted data    
+=====================================================================================================
+Working with Forms
+  - HTML 5 Forms
+  - JSX parsing for implementing the Form Model for validations
+  
+Using LifeCycle
 
+-- Error Handling in Components using Component's lifecycle
 
+Ajax calls
+- Using the axios Library
+  - The "Promise" based library used for Async HTTP calls
+- Use the TableComponent to show Products information in the
+ProductsComponent and perform CRUD operations.
+- The Delete Button of the TableComponent should Delete Product
+ from the ProductsComponent, by making the delete call to service
+ from the Product COmponent 
+
+=====================================================================================================
+React Hooks
+Functional Components
+
+=====================================================================================================
+Advanced Programming with React.js and State Manegement
 
 
 

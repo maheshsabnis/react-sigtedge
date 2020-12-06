@@ -73,7 +73,7 @@ class ProductComponent extends Component {
     
         let prds = this.logic.addProduct(prd);
         // update the products state using the prds
-        // the ()=>{} (ballback) will make sure that
+        // the ()=>{} (callback) will make sure that
         // the update state is mutated in the state property
         // generally this is implemented for <select> elements to update state 
         // on change event  of <select> element
