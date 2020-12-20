@@ -14,6 +14,11 @@ import DataValidationComponent from './components/validationcomponent/datavalida
 
 import LifeCycleComponent from './components/lifecycledemos/lifecyclecomponent'
 import ServiceCompoent from './components/servicecomponent/servicecomponent';
+import MyComponent from './funcitoncomponents/firstfunctioncomponent';
+import StateComponent from './funcitoncomponents/stateComponent';
+import UseEffectAjaxCallsComponent from './funcitoncomponents/useEffectAjaxCallsComponent.jsx';
+
+import MouseMoveToggelingComponent from './funcitoncomponents/mouseMoveToggelingComponent';
 // web utilities used by react-scripts
 import reportWebVitals from './reportWebVitals';
 // Using React.dom
@@ -27,7 +32,7 @@ const v1=100;
 ReactDOM.render(
   <React.StrictMode>
    {/* <SimpleComponent msg={message} val={v1}/> */}
-   <ServiceCompoent></ServiceCompoent>
+   <MouseMoveToggelingComponent></MouseMoveToggelingComponent>
   </React.StrictMode>,
   document.getElementById('root')
 );

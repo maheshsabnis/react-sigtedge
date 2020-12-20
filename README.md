@@ -167,11 +167,55 @@ ProductsComponent and perform CRUD operations.
  from the ProductsComponent, by making the delete call to service
  from the Product COmponent 
 
-=====================================================================================================
+========================================================================================================================================
 React Hooks
 Functional Components
+- JavaScript Functions those returns HTML and have capability of State Management, LifeCycle hook, implemented using standard React Functions.
+- Removes or elimnates the confision of Class components for OOPs implemenation
+- React 16.0+ functional components precisely 16.8 release
+    - 16.8 , React Hooks
+- syntax
+  - function MyComponent(props){... some logic ..... return {<HTML/>}}; export default MyComponent;
+  - ReactDOM.render('<MyComponent/>');
 
-=====================================================================================================
+- Syntax, ES 6 Function Expressions using Arrow Operators
+  - const MyComponent=(props)=>{  constant function expressions with logic return {<HTML/>}}; export default MyComponeny;  
+  - ReactDOM.render('<MyComponent/>'); 
+
+ - Some Questions w.r.t. Functional Components aka React Hooks
+ Q1. How to maintain state in functional component?
+  - Use 'useState()' react hooks for maintaining and updating state
+ Q2. How to Share data across components?
+  - Use 'props' like class components
+  - Use 'useContext' to share data across components.
+  - The 'createContext()' from 'react' provides mechansim of defining object independent to components
+    to maintain state of data across components
+      - The createContext() object has the 'provider' property having 'value' object in it.
+      - This 'value' object pass data across components 
+ Q3. How to share events across components?
+  - using 'props'
+  - the Context-Object's mechanism of passing function renferences.
+ Q4. How to manage ComponenDidMount() and ComponentWillUnMount() aka managing lifecycle?
+  - The 'useEffect()' hook. This is combination of  ComponenDidMount() and ComponentWillUnMount()
+  - useEffect() will be executed for every state change and will keep continue. This 
+  will be a issue in the React lifecycle if the useEffect() is making an AJAX call (componenrDidMount).
+  To complete an execution of useEffect() pass the dependency array [] parameter to it
+  so that once the state is modified the depednency parameter will be notified by the rendering and
+  the useEffect () will complete its execution.
+ Q5. How to define front-end UI logic inside the functional component? 
+  - create constant function expression, const mylogic=()=>{....... logic.....};
+  - create child functions, function mylogic(){.......}; 
+
+More Hooks
+  - useReducer(), useMemo(), useRef(), etc. https://reactjs.org/docs/hooks-reference.html#useref
+
+
+IMPORTANT: React Hooks cannot be used inside child funciton of funcitonal component. They are alweays used at component level. 
+
+
+
+
+========================================================================================================================================
 Advanced Programming with React.js and State Manegement
 
 
