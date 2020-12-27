@@ -217,6 +217,283 @@ IMPORTANT: React Hooks cannot be used inside child funciton of funcitonal compon
 
 ========================================================================================================================================
 Advanced Programming with React.js and State Manegement
+Instaling Redux and Saga Dependencies
+npm install --save redux react-redux saga redux-saga
+
+- redux: The library for providing object model for Application State Management.
+- react-redux: The library that connects the redux with react so that the Application State Management is available for React Applications.
+- saga: The Middleware used by redux for performing any asynchronous operations e.g. RESTA API calls
+- redux-saga: the Connetc between saga and redux so that the saga middleware is registered in redux
+app and hence will be used by React applications.
+
+# Step 1: Create Actions
+This is a method that will listen to an event that is dispatched from UI
+The Action accepts the Payload a.k.a. the data send from the View, it returns an output action as well as the response payload. Alternatively, the method may contains any other logic as per the need
+
+
+const addPtroduct=(product)=>{
+    // some other logic e.g. promises, etc.
+    return {
+        type: "ADD_PRODUCT", // the action that is dispatched and same will be returned
+        product // the payload
+    }
+}
+
+export default addPtroduct;
+
+# Step 2: Create a reducer
+This is JavaScript pure function. This accepts and action and state as input parameter and returns the state as output parameter. The state in the store will be updated based on the ACTION that is dispatched from view and the output action that is received.
+
+// import the action
+
+
+import addProduct from './../actions/action';
+
+import {combineReducers} from 'redux';
+
+
+// write the reducer functions. These are the pure functions.
+// the first parameter is the state that will be updated in store
+// this state is the older state that is used by reducer function to update based on action
+// the second parameter is the action based on which the reducer will be executed  
+
+
+export const addProductReducer=(state,action)=>{
+    switch(action.type){
+        case 'ADD_PRODUCT': {
+            return {
+                product:action.product // the returned product from action will be added in store
+            }
+        }
+        default:
+            return state; // return default state from the store
+    }
+};
+
+// initially there is not data in state but it will be updated
+// as the new products are added based on the ADD_PRODUCT Action
+// even if not action is dispatched still the component
+// must be shown with some daya from store
+// thats why this new reducer function created
+
+
+export const listProductReducer=(state=[],action)=>{
+    switch(action.type){
+        case 'ADD_PRODUCT': {
+            // this reducer makes call to the addProductReducer and read the new product
+            // updated in the store
+            return [...state, addProductReducer(undefined, action)];  
+            
+        }
+        default:
+            return state; // return default state from the store
+    }
+} 
+
+// the Most Important step combine all reducers and provide them to the redux
+
+const rootReducer = combineReducers({listProductReducer});
+export default rootReducer;
+
+
+# Step 3: Configure the store at the root level of the application and then configure reducer to manage the execution of the store will state update in it
+
+The 'createStore' function from 'redux', that accepts first parameter as reducer, secod parameter as middleware (for ajax calls), and the third parameter as the DEV_TOOLS (not in production)
+
+The 'Provider', this is the bridge between React and Redux. This is available in 'react-redux' package 
+
+// The react object model loading
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// css object model imports
+
+import './index.css';
+// imporing the bootstrap modules
+
+import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+import {createStore} from  'redux';
+import {Provider} from 'react-redux';
+
+// import reducer
+
+import rootReducer from './reduxappfunctionalcomponents/reducers/redecures';
+
+import MainComponent from './reduxappfunctionalcomponents/MainComponent';
+// web utilities used by react-scripts
+
+import reportWebVitals from './reportWebVitals';
+
+
+// create a store
+// window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
+// enabling the browser extension for redux for state simuldation
+ 
+ let store = createStore(rootReducer,
+   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
+
+// use 'store' property of the Provider to load store for Application State Management
+// all components executed inside the Provider will be automatically subscribed to store
+
+ReactDOM.render(
+  <Provider store={store}>
+   <MainComponent></MainComponent>
+   </Provider>,
+  document.getElementById('root')
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
+reportWebVitals();
+
+
+# The Add Product Component
+
+import React, { useState, useEffect } from 'react';
+
+
+
+const AddProductComponent=(props)=>{
+    const [product,updateProduct]=useState({ProductId:0,ProductName:''});
+
+
+    const save=()=>{
+         // logic for adding data by dispatching action  
+         // the AddClick is ptops type from the parent i.e. MainComponent
+         // it is passed with 'product' state object 
+         props.AddClick(product);
+    }
+
+    const clear=()=>{
+        updateProduct({ProductId:0,ProductName:''});
+    }
+
+    return(
+      <div className="container">
+         <div className="form-group">
+              <label>Product Id</label>  
+              <input type="text" className="form-control"
+               value={product.ProductId}
+               onChange={(evt)=> updateProduct({...product, ProductId: parseInt(evt.target.value)})}/>
+         </div>
+         <div className="form-group">
+              <label>Product Name</label>  
+              <input type="text" className="form-control"
+              value={product.ProductName}
+              onChange={(evt)=> updateProduct({...product, ProductName: evt.target.value})}/>
+         </div>
+         <div className="form-group">
+             <input type="button" value="Clear" onClick={clear} className="btn btn-warning"/>
+             <input type="button" value="Save" onClick={save} className="btn btn-success"/>
+         </div>
+      </div>
+  );
+};
+
+export default AddProductComponent;
+
+
+
+# The List Product Component
+
+import React from 'react';
+
+const ListProductsComponent=(props)=>{
+
+    if(props.listProducts === undefined || props.listProducts.length === 0) {
+       return (
+        <div className="container">
+        <strong> No Data Received from Store</strong>
+      </div> 
+
+       )
+    } else {
+
+    return (
+        <div className="container">
+           <div>
+             <strong>Data received from Stiore</strong>
+           </div>
+           <table className="table table-bordered table-dark table-striped">
+             <thead>
+                <tr>
+                    <td>
+                        ProductId
+                    </td>
+                    <td>
+                       Product Name
+                    </td>
+                </tr>
+             </thead>
+             <tbody>
+               {
+                    props.listProducts.map((prd,idx)=>(
+                        <tr key={idx}>
+                           <td>
+                              {prd.product.ProductId}
+                           </td>
+                           <td>
+                              {prd.product.ProductName }
+                           </td>
+                        </tr>
+                    ))
+               }
+             </tbody>
+           </table>
+        </div>
+    );
+            }
+};
+
+export default ListProductsComponent;
+
+# The Main Component
+
+import React from 'react';
+
+import AddProductComponent from './components/addproductcomponent';
+import ListProductsComponent from './components/listproductcomponent';
+
+
+// import the redux hooks to dispatch actions and subscribe to the store using reducers
+// to read data
+// useDispatch hooks for dispatching action from UI
+// useSelector hooks for subscribing to store to read data
+
+import {useSelector, useDispatch} from 'react-redux';
+
+// import then action being dispatch
+import addProduct from './actions/action';
+
+
+const MainComponent=()=>{
+
+    // read all products from the store
+    let products = useSelector(state=>state.listProductReducer);
+
+    // the dispatch object to dispatch action
+    let dispatch = useDispatch();
+    return(
+        <div className="container">
+           <h2>Redux App using Fucntional Components</h2>
+           {/*  create a props type that will be passed to AddProductComponent 
+        to dispatch the action */}
+           <AddProductComponent AddClick={(product)=> dispatch(addProduct(product))}/>
+           <hr/>
+           {/* create a  props type that will pass the data to show list of products
+            these product will be received from the 'store' using  useSelector() hooks
+        */}
+           <ListProductsComponent listProducts={products}/>
+        </div>
+    );
+};
+
+export default MainComponent;
+
 
 
 

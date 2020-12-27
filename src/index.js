@@ -6,34 +6,30 @@ import './index.css';
 // imporing the bootstrap modules
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-// import develper created Components (class components/  functional components)
-import App from './App';
-import EventComponent from './components/eventcomponent/eventcomponent';
-import ProductComponent from './components/productcomponent/productcomponent'; 
-import DataValidationComponent from './components/validationcomponent/datavalidationcomponent';
+import {createStore} from  'redux';
+import {Provider} from 'react-redux';
 
-import LifeCycleComponent from './components/lifecycledemos/lifecyclecomponent'
-import ServiceCompoent from './components/servicecomponent/servicecomponent';
-import MyComponent from './funcitoncomponents/firstfunctioncomponent';
-import StateComponent from './funcitoncomponents/stateComponent';
-import UseEffectAjaxCallsComponent from './funcitoncomponents/useEffectAjaxCallsComponent.jsx';
+// import reducer
 
-import MouseMoveToggelingComponent from './funcitoncomponents/mouseMoveToggelingComponent';
+import rootReducer from './reduxappfunctionalcomponents/reducers/redecures';
+
+import MainComponent from './reduxappfunctionalcomponents/MainComponent';
 // web utilities used by react-scripts
 import reportWebVitals from './reportWebVitals';
-// Using React.dom
-// Get the Component Instance
-// Validate the Component using JSX
-// MOUNT the Component in Browser as 'Custom-Element'
-const message = "I am the Parent Component";
-const v1=100;
-// the message will be passed to the SimpleComponent
-// using Custom property System of 'props' with the property name as 'msg'
+
+
+// create a store
+// window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
+// enabling the browser extension for redux for state simuldation
+let store = createStore(rootReducer,
+   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
+
+// use 'store' property of the Provider to load store for Application State Management
+// all components executed inside the Provider will be automatically subscribed to store
 ReactDOM.render(
-  <React.StrictMode>
-   {/* <SimpleComponent msg={message} val={v1}/> */}
-   <MouseMoveToggelingComponent></MouseMoveToggelingComponent>
-  </React.StrictMode>,
+  <Provider store={store}>
+   <MainComponent></MainComponent>
+   </Provider>,
   document.getElementById('root')
 );
 
