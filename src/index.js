@@ -6,30 +6,53 @@ import './index.css';
 // imporing the bootstrap modules
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-import {createStore} from  'redux';
-import {Provider} from 'react-redux';
+// import object molde from redux to create storr, cofigure middleware , browser simulation compose
+import { createStore, applyMiddleware,compose } from "redux";
+// provider
+import { Provider } from "react-redux";
 
-// import reducer
+// reducrer
 
-import rootReducer from './reduxappfunctionalcomponents/reducers/redecures';
+import reducer from './sagaapp/reducers/reducers';
 
-import MainComponent from './reduxappfunctionalcomponents/MainComponent';
+// root saga
+import rrootSaga from './sagaapp/sagas/index';
+
+// create-middleware to register the SAGA middleware with store
+
+import createSagaMiddleware from 'redux-saga';
+
+
+
+import MainSagaComponent from './sagaapp/MainSagaComponent';
+ 
 // web utilities used by react-scripts
 import reportWebVitals from './reportWebVitals';
+import rootSaga from './sagaapp/sagas/index';
+
+// create an instance of Saga Middleware
+
+const appSagaMiddleware = createSagaMiddleware();
+
+// create  a Paramater ENhancer taht will
+// compose an object for createStore() to create store with middleware
+// and the RDUX Tools
+
+const parameterEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__  || compose;
+
+// create a store by condiguring reducre and parameter enhancer along with middleware
+let store = createStore(reducer, parameterEnhancer(applyMiddleware(appSagaMiddleware)));
+
+// keep te saga middleware runniung so that it can monitor the action displatched
+appSagaMiddleware.run(rootSaga);
 
 
-// create a store
-// window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
-// enabling the browser extension for redux for state simuldation
-let store = createStore(rootReducer,
-   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
-
-// use 'store' property of the Provider to load store for Application State Management
-// all components executed inside the Provider will be automatically subscribed to store
+// subscribe the store to components
+  
 ReactDOM.render(
   <Provider store={store}>
-   <MainComponent></MainComponent>
-   </Provider>,
+   <MainSagaComponent></MainSagaComponent>
+  </Provider>,
   document.getElementById('root')
 );
 

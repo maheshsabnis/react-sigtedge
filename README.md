@@ -495,6 +495,51 @@ const MainComponent=()=>{
 export default MainComponent;
 
 
+Promise
+  - Resolve aka success
+  - Reject  aka failed
+
+Action Dispatched --> GET_PRODCUTS --> Aync Calls--> Promise
+
+Promise Response --> GET_PRODUCTS_SUCCESS
+Promise Response --> GET_PRODUCTS_FAILED 
+
+# Middleware Behavior
+
+Component Dispatched Input Action --> Output Action
+
+Component Dispatch Action --> Listened By Middleware --> Monitor the Action Execution --> Dispatch Output Action
+
+- saga and redux-saga packages
+  - saga - contains APIs for creating middleware
+  - redux-saga
+      - redux-saga/effects
+          - Operators to perform the middleware operations 
+              - call() method to call the method that returns promise
+              - put(), used to return the output action along with result
+              - takeLatest(), monitor the action dispatched from UI
+              - all(), used to keep monitoring an executing SAGA Middleware functions (?)
+                  - SAGA Middleware functions() the ES 6 'Generator Functiions'
+                    - Synatx
+                      - function* myFunction(){
+                         yield the result
+                      }
+                      - yield-> Read a current record, process it, return it and continue execution to next record
+
+# installing SAGA
+
+npm install --save saga redux-saga
+
+
+
+
+
+
+
+
+
+
+
 
 
 
