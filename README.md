@@ -532,6 +532,9 @@ npm install --save saga redux-saga
 
 
 
+# Error Boundrties
+An approach of handling global exceptions in React App using Compponent's lifewcycle
+This is available only for Class components 
 
 
 

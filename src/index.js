@@ -6,53 +6,22 @@ import './index.css';
 // imporing the bootstrap modules
 import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-// import object molde from redux to create storr, cofigure middleware , browser simulation compose
-import { createStore, applyMiddleware,compose } from "redux";
-// provider
-import { Provider } from "react-redux";
-
-// reducrer
-
-import reducer from './sagaapp/reducers/reducers';
-
-// root saga
-import rrootSaga from './sagaapp/sagas/index';
-
-// create-middleware to register the SAGA middleware with store
-
-import createSagaMiddleware from 'redux-saga';
-
-
-
-import MainSagaComponent from './sagaapp/MainSagaComponent';
+import CounterContainerComponent from './components/errorboundries/errorboundrycomponent';
  
 // web utilities used by react-scripts
 import reportWebVitals from './reportWebVitals';
-import rootSaga from './sagaapp/sagas/index';
-
-// create an instance of Saga Middleware
-
-const appSagaMiddleware = createSagaMiddleware();
-
-// create  a Paramater ENhancer taht will
-// compose an object for createStore() to create store with middleware
-// and the RDUX Tools
-
-const parameterEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__  || compose;
-
-// create a store by condiguring reducre and parameter enhancer along with middleware
-let store = createStore(reducer, parameterEnhancer(applyMiddleware(appSagaMiddleware)));
-
-// keep te saga middleware runniung so that it can monitor the action displatched
-appSagaMiddleware.run(rootSaga);
-
-
-// subscribe the store to components
-  
+// Using React.dom
+// Get the Component Instance
+// Validate the Component using JSX
+// MOUNT the Component in Browser as 'Custom-Element'
+const message = "I am the Parent Component";
+const v1=100;
+// the message will be passed to the SimpleComponent
+// using Custom property System of 'props' with the property name as 'msg'
 ReactDOM.render(
-  <Provider store={store}>
-   <MainSagaComponent></MainSagaComponent>
-  </Provider>,
+  <React.StrictMode>
+   <CounterContainerComponent></CounterContainerComponent>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
